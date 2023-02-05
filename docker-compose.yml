@@ -1,0 +1,25 @@
+services:
+  api:
+    container_name: ${API_HOST}
+    build: ./backend
+    restart: unless-stopped
+    networks:
+      - express
+    ports:
+      - 3000
+  front:
+    container_name: app
+    build: ./frontend
+    environment:
+      - ORIGIN=http://${API_HOST}:${API_PORT}
+    restart: unless-stopped
+    networks:
+      - express
+    ports:
+      - 3000:3000
+    depends_on:
+      - api
+
+networks:
+  express:
+    driver: bridge
