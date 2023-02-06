@@ -3,6 +3,8 @@ services:
     container_name: ${API_HOST}
     build: ./backend
     restart: unless-stopped
+    env_file:
+      - .env
     networks:
       - express
     ports:
