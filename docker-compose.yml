@@ -1,10 +1,8 @@
 services:
   api:
-    container_name: ${API_HOST}
+    container_name: api
     build: ./backend
     restart: unless-stopped
-    env_file:
-      - .env
     networks:
       - express
     ports:
@@ -13,7 +11,7 @@ services:
     container_name: app
     build: ./frontend
     environment:
-      - ORIGIN=http://${API_HOST}:${API_PORT}
+      - ORIGIN=https://secure-web-dev-backend.onrender.com
     restart: unless-stopped
     networks:
       - express
